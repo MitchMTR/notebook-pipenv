@@ -46,8 +46,35 @@ pipenv shell
 python --version
 Python 3.11.9
 ```
-- Easy!
-- Now we can install the jupyter notebook and ipykernel packages
+- Easy!   We can add the waterAI private repo to the source section to install packages from there (like forecast library)
+3. Now we can install the jupyter notebook and ipykernel packages
 ```
 #pipenv install jupyter notebook ipykernel
+Installing jupyter...
+Resolving jupyter...
+Added jupyter to Pipfile's [packages] ...
+✔ Installation Succeeded
+Added notebook to Pipfile's [packages] ...
+✔ Installation Succeeded
+Added ipykernel to Pipfile's [packages] ...
+✔ Installation Succeeded
+Pipfile.lock (51d3e4) out of date, updating to (361b8e)...
+Locking [packages] dependencies...
+✔ Success!
+Locking [dev-packages] dependencies...
+Updated Pipfile.lock (b46ed13dbda2e15ce5b3a7c3d3e47845334480f8e96a2cafeb02abc627361b8e)!
+Installing dependencies from Pipfile.lock (361b8e)...
 ```
+- this did a few things - each package was installed from the pypi repo, and their dependent packages, added to the virtual environment managed by this pipenv, and the Pipfile.lock was updated to the exact versions that were installed just NOW.  (they may change as new versions are released... hence the lock file)
+
+4. Now we can setup jupyter to have a kernel available that is this virtual environment (managed by pipenv)
+```
+#python -m ipykernel install --user --name=test-notebook-pipenv
+and let's run a notebook:
+jupyter notebook
+```
+- this will open a browser window with the jupyter notebook interface, and you can create a new notebook, and select the kernel that was just installed.  This will ensure that the notebook is running in the virtual environment, and has access to the packages that were installed there.
+- File -> New (select test-notebook-pipenv as the kernel for the new file)
+'''
+import numpy as np:
+'''
